@@ -44,8 +44,6 @@
 //double y[N];
 double *x,*w;
 double output = 0.0;
-Int16 sample;
-
 double xs[] = {0.0, 0.0};
 double bs[] = {1.0/17.0, 1.0/17.0};
 double a1 = 15.0/17.0;
