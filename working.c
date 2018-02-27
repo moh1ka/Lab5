@@ -39,9 +39,6 @@
 #include "iir_coef.txt"
 
 /******************************* Global declarations ********************************/
-//M = sizeof(a)/sizeof(a[0])-1; //find the order of the filter 
-//double x[N];
-//double y[N];
 double *x,*w;
 
 double output = 0.0;
@@ -87,25 +84,25 @@ double iir_trans (void);
 /********************************** Main routine ************************************/
 void main()
 {      
-	int i;
-	x = (double*)calloc(N, sizeof(double));
+    int i;
+    x = (double*)calloc(N, sizeof(double));
     w = (double*)calloc(N+1, sizeof(double));
     for(i=0;i<N;i++)
     {
-		x[i]=0.0; //initializes x to zeros
-  	    w[i]=0.0; //initializes w[0] to w[N-1] to zero 
+	x[i]=0.0; //initializes x to zeros
+  	w[i]=0.0; //initializes w[0] to w[N-1] to zero 
     }
 	
-	w[N] = 0.0; //now all of w is initialized to zero
+     w[N] = 0.0; //now all of w is initialized to zero
 	
-	// initialize board and the audio port
+    // initialize board and the audio port
     init_hardware();
     /* initialize hardware interrupts */
     init_HWI();
   	 		
     /* loop indefinitely, waiting for interrupts */  					
-	while(1) 
-	{};
+    while(1) 
+    {};
   
 }
         
@@ -157,16 +154,13 @@ void lab5(void)
 // ------------------------------------------------------------------------------
 double single_pole_iir (void)//y[n] = 1/17*x[n] + 1/17*x[n-1] - 15/17*y[n-1]
 {	
-	
-		//sample = mono_read_16Bit();
 	xs[1] =  mono_read_16Bit();
-		//differnce equaiton:
+	//difference equaiton:
 	output= bs[0]*xs[1] + bs[1]*xs[0] + a1*output;
-		//delay the smaples:
+	//delay the samples:
 	xs[0] = xs[1];
 	
-	return output;
-	
+	return output;	
 }
 
 double iir_direct (void)
@@ -178,7 +172,7 @@ double iir_direct (void)
 	sample = mono_read_16Bit();
 	x[ptr] = sample;
 	
-	//convolution
+	//MAC
 	for(i=1; i<N; i++)
 	{
 		int index = ptr+i;
