@@ -40,13 +40,14 @@
 
 /******************************* Global declarations ********************************/
 double *x,*w;
+int ptr = N-1;
 
+//Declarations for Low pass Filter
 double output = 0.0;
 double xs[] = {0.0, 0.0};	
 double bs[] = {1.0/17.0, 1.0/17.0};	//b taps
 double a1 = 15.0/17.0; 
 
-int ptr = N-1;
 /* Audio port configuration settings: these values set registers in the AIC23 audio 
    interface to configure it. See TI doc SLWS106D 3-3 to 3-10 for more info. */
 DSK6713_AIC23_Config Config = { \
