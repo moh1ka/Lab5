@@ -43,10 +43,11 @@
 //double x[N];
 //double y[N];
 double *x,*w;
+
 double output = 0.0;
-double xs[] = {0.0, 0.0};
-double bs[] = {1.0/17.0, 1.0/17.0};
-double a1 = 15.0/17.0;
+double xs[] = {0.0, 0.0};	
+double bs[] = {1.0/17.0, 1.0/17.0};	//b taps
+double a1 = 15.0/17.0; 
 
 int ptr = N-1;
 /* Audio port configuration settings: these values set registers in the AIC23 audio 
@@ -157,16 +158,14 @@ void lab5(void)
 double single_pole_iir (void)//y[n] = 1/17*x[n] + 1/17*x[n-1] - 15/17*y[n-1]
 {	
 	
-	//sample = mono_read_16Bit();
+		//sample = mono_read_16Bit();
 	xs[1] =  mono_read_16Bit();
+		//differnce equaiton:
 	output= bs[0]*xs[1] + bs[1]*xs[0] + a1*output;
+		//delay the smaples:
 	xs[0] = xs[1];
-	return output;
 	
-	/*xsing[1] = mono_read_16Bit(); //x[1] is most recent, x[0] oldest sample
-	output = bsing[0]*xsing[1] + bsing[1]*xsing[0] + a1*output; //y[n-1] is overwritten by y[n]= y
-	xsing[0] = xsing[1];
-	return output;*/
+	return output;
 	
 }
 
