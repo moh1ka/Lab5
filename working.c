@@ -170,8 +170,7 @@ double iir_direct (void)
 	double w = 0.0;
 	double v = 0.0;
 	double out = 0.0;
-	sample = mono_read_16Bit();
-	x[ptr] = sample;
+	x[ptr] = mono_read_16Bit();
 	
 	//MAC
 	for(i=1; i<N; i++)
