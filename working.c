@@ -78,7 +78,7 @@ void lab5(void);
 
 // ------------------------------Function Definitions---------------------------
  
-double single_pole_iir (void);
+double lpf_iir (void);
 double iir_direct (void);
 double iir_trans (void);
 
@@ -147,14 +147,13 @@ void init_HWI(void)
 /******************** WRITE YOUR INTERRUPT SERVICE ROUTINE HERE***********************/  
 void lab5(void)
 {
-	//mono_write_16Bit(single_pole_iir());
-	//mono_write_16Bit(iir_direct());//double size buffer 
-	//mono_write_16Bit(mono_read_16Bit());
-	mono_write_16Bit(iir_trans());
+	//mono_write_16Bit(lpf_iir());
+	mono_write_16Bit(iir_direct());//Direct Form II implementaion using Circular Buffer
+	//mono_write_16Bit(iir_trans());//Direct From II TRANSPOSED implementation
 }
 
 // ------------------------------------------------------------------------------
-double single_pole_iir (void)//y[n] = 1/17*x[n] + 1/17*x[n-1] - 15/17*y[n-1]
+double lpf_iir (void)//y[n] = 1/17*x[n] + 1/17*x[n-1] - 15/17*y[n-1]
 {	
 	xs[1] =  mono_read_16Bit();
 	//difference equaiton:
