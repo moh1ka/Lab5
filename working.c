@@ -39,7 +39,7 @@
 #include "iir_coef.txt"
 
 /******************************* Global declarations ********************************/
-double *x,*w;
+double *p,*w;
 int ptr = N-1;
 
 //Declarations for Low pass Filter
@@ -86,11 +86,11 @@ double iir_trans (void);
 void main()
 {      
     int i;
-    x = (double*)calloc(N, sizeof(double));
+    p = (double*)calloc(N, sizeof(double));
     w = (double*)calloc(N+1, sizeof(double));
     for(i=0;i<N;i++)
     {
-	x[i]=0.0; //initializes x to zeros
+	p[i]=0.0; //initializes p to zeros
   	w[i]=0.0; //initializes w[0] to w[N-1] to zero 
     }
 	
@@ -170,7 +170,7 @@ double iir_direct (void)
 	double w = 0.0;
 	double v = 0.0;
 	double out = 0.0;
-	x[ptr] = mono_read_16Bit();
+	p[ptr] = mono_read_16Bit();
 	
 	//MAC
 	for(i=1; i<N; i++)
@@ -181,12 +181,12 @@ double iir_direct (void)
 		{
 			index = (index % N);
 		}
-		v += a[i]*x[index];
-		w += b[i]*x[index]; 
+		v += a[i]*p[index];
+		w += b[i]*p[index]; 
 	}
 	
-	x[ptr] -= v;
-	out = w + b[0]*x[ptr];
+	p[ptr] -= v;
+	out = w + b[0]*p[ptr];
 	
 	if(ptr == 0)
 	{
