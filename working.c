@@ -85,16 +85,17 @@ double iir_trans (void);
 /********************************** Main routine ************************************/
 void main()
 {      
-    int i;
+    //int i;
     p = (double*)calloc(N, sizeof(double));
     w = (double*)calloc(N+1, sizeof(double));
-    for(i=0;i<N;i++)
-    {
-	p[i]=0.0; //initializes p to zeros
-  	w[i]=0.0; //initializes w[0] to w[N-1] to zero 
-    }
+	//shouldn't be needed since calloc zero-initialises 
+//     for(i=0;i<N;i++)
+//     {
+// 	p[i]=0.0; //initializes p to zeros
+//   	w[i]=0.0; //initializes w[0] to w[N-1] to zero 
+//     }
 	
-     w[N] = 0.0; //now all of w is initialized to zero
+//      w[N] = 0.0; //now all of w is initialized to zero
 	
     // initialize board and the audio port
     init_hardware();
